@@ -1,0 +1,3 @@
+query { user(id: "u-alice") { ...F } }
+fragment F on User { name ...G }
+fragment G on User { id ...F }

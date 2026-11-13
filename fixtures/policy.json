@@ -1,0 +1,8 @@
+{
+  "max_depth": 5,
+  "max_complexity": 50,
+  "list_factor": 10,
+  "max_aliases_per_field": 3,
+  "admin_bypass": false,
+  "admin_bypass_owner": true
+}

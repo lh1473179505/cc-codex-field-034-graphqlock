@@ -1,0 +1,163 @@
+{
+  "query": "Query",
+  "implements": {},
+  "types": {
+    "ID": {
+      "kind": "scalar",
+      "fields": {}
+    },
+    "String": {
+      "kind": "scalar",
+      "fields": {}
+    },
+    "Int": {
+      "kind": "scalar",
+      "fields": {}
+    },
+    "Query": {
+      "kind": "object",
+      "fields": {
+        "user": {
+          "type": "User",
+          "args": [
+            "id"
+          ],
+          "cost": 1,
+          "auth": {
+            "owner_arg": "id"
+          }
+        },
+        "users": {
+          "type": "User",
+          "list": true,
+          "args": [
+            "first"
+          ],
+          "cost": 2,
+          "auth": {
+            "roles": [
+              "admin",
+              "staff"
+            ]
+          }
+        }
+      }
+    },
+    "User": {
+      "kind": "object",
+      "fields": {
+        "id": {
+          "type": "ID",
+          "cost": 1
+        },
+        "name": {
+          "type": "String",
+          "cost": 1
+        },
+        "email": {
+          "type": "String",
+          "cost": 1,
+          "auth": {
+            "roles": [
+              "admin"
+            ],
+            "tenant_field": true
+          }
+        },
+        "tenant": {
+          "type": "String",
+          "cost": 1,
+          "auth": {
+            "roles": [
+              "admin"
+            ]
+          }
+        },
+        "orders": {
+          "type": "Order",
+          "list": true,
+          "args": [
+            "first"
+          ],
+          "cost": 3,
+          "auth": {
+            "tenant_field": true
+          }
+        }
+      }
+    },
+    "Order": {
+      "kind": "object",
+      "fields": {
+        "id": {
+          "type": "ID",
+          "cost": 1
+        },
+        "total": {
+          "type": "Int",
+          "cost": 1,
+          "auth": {
+            "roles": [
+              "admin",
+              "staff"
+            ],
+            "tenant_field": true
+          }
+        },
+        "note": {
+          "type": "String",
+          "cost": 1,
+          "auth": {
+            "roles": [
+              "admin"
+            ]
+          }
+        },
+        "user": {
+          "type": "User",
+          "cost": 2
+        }
+      }
+    }
+  },
+  "data": {
+    "users": {
+      "u-alice": {
+        "id": "u-alice",
+        "name": "Alice",
+        "email": "alice@shop.test",
+        "tenant": "shop"
+      },
+      "u-bob": {
+        "id": "u-bob",
+        "name": "Bob",
+        "email": "bob@shop.test",
+        "tenant": "shop"
+      },
+      "u-eve": {
+        "id": "u-eve",
+        "name": "Eve",
+        "email": "eve@other.test",
+        "tenant": "other"
+      }
+    },
+    "orders_by_user": {
+      "u-alice": [
+        {
+          "id": "o-1",
+          "total": 40,
+          "note": "rush",
+          "tenant": "shop"
+        }
+      ],
+      "u-bob": [
+        {
+          "id": "o-2",
+          "total": 99,
+          "note": "vip",
+          "tenant": "shop"
+        }
+      ]
+    }
+  }
+}

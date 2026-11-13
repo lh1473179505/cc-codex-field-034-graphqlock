@@ -1,0 +1,7 @@
+{
+  "id": "u-alice",
+  "roles": [
+    "customer"
+  ],
+  "tenant": "shop"
+}

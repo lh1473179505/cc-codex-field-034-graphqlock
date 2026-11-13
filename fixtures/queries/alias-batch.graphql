@@ -1,0 +1,1 @@
+query { user(id: "u-alice") { a: name b: name c: name d: name } }
